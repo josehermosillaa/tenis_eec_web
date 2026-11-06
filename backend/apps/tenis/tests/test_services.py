@@ -37,6 +37,18 @@ class DominioDivisionesTest(TestCase):
         self.assertEqual(ranking[self.b]["puntos_partidos"], 2)
         self.assertEqual(ranking[self.a]["juegos_ganados"], 9)
 
+    def test_retiro_oculta_jugador_y_reactivacion_recupera_historial(self):
+        Partido.objects.create(division=self.div, fecha=date.today(), jugador_a=self.ia, jugador_b=self.ib,
+            set_1="6/4", set_2="6/3", ganador=self.ia)
+        self.a.estado = Jugador.Estado.RETIRADO; self.a.save()
+        ranking = calcular_ranking(self.div)
+        self.assertEqual([fila["jugador"] for fila in ranking], [self.b])
+        self.assertEqual(ranking[0]["puntos_partidos"], 1)
+        self.a.estado = Jugador.Estado.ACTIVO; self.a.save()
+        restaurado = calcular_ranking(self.div)
+        self.assertEqual(restaurado[0]["jugador"], self.a)
+        self.assertEqual(restaurado[0]["puntos_partidos"], 3)
+
     def test_rankings_de_divisiones_son_independientes(self):
         otra_liga = Liga.objects.create(nombre="Verano 2028", fecha_inicio=date(2028, 1, 1), estado=Liga.Estado.ACTIVA)
         otra = Division.objects.create(liga=otra_liga, nombre="Tercera-Cuarta", orden=1)

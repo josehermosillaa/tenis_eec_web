@@ -41,9 +41,13 @@ class Jugador(models.Model):
     def __str__(self): return self.nombre
 
 class Division(models.Model):
+    class Estado(models.TextChoices):
+        ACTIVA = "ACTIVA", "Activa"
+        CANCELADA = "CANCELADA", "Cancelada"
     liga = models.ForeignKey(Liga, on_delete=models.PROTECT, related_name="divisiones")
     nombre = models.CharField(max_length=100)
     orden = models.PositiveIntegerField(default=0)
+    estado = models.CharField(max_length=10, choices=Estado.choices, default=Estado.ACTIVA, db_index=True)
     categorias = models.ManyToManyField(Categoria, through="DivisionCategoria", related_name="divisiones")
     class Meta:
         ordering = ["orden", "nombre", "id"]
@@ -65,6 +69,8 @@ class DivisionCategoria(models.Model):
     def clean(self):
         if self.division_id and self.division.liga.estado == Liga.Estado.CERRADA:
             raise ValidationError("Una liga cerrada no admite cambios de categorías.")
+        if self.division_id and self.division.estado == Division.Estado.CANCELADA:
+            raise ValidationError("Una división cancelada no admite cambios de categorías.")
         if type(self).objects.filter(division__liga_id=self.division.liga_id, categoria_id=self.categoria_id).exclude(pk=self.pk).exists():
             raise ValidationError("La categoría ya pertenece a otra división de esta liga.")
     def save(self, *args, **kwargs): self.full_clean(); return super().save(*args, **kwargs)
@@ -80,10 +86,15 @@ class InscripcionDivision(models.Model):
     activa = models.BooleanField(default=True, db_index=True)
     inscrito_en = models.DateTimeField(auto_now_add=True)
     class Meta:
-        constraints = [models.UniqueConstraint(fields=["division", "jugador"], name="jugador_unico_por_division")]
+        constraints = [models.UniqueConstraint(
+            fields=["division", "jugador"], condition=models.Q(activa=True),
+            name="jugador_activo_unico_por_division",
+        )]
     def clean(self):
         if self.division_id and self.division.liga.estado == Liga.Estado.CERRADA:
             raise ValidationError("Una liga cerrada no admite cambios de inscripciones.")
+        if self.division_id and self.division.estado == Division.Estado.CANCELADA:
+            raise ValidationError("Una división cancelada no admite cambios de inscripciones.")
         if self.division_id and self.categoria_id and not DivisionCategoria.objects.filter(division_id=self.division_id, categoria_id=self.categoria_id).exists():
             raise ValidationError("La categoría histórica no está permitida en esta división.")
         if not self.pk and self.jugador_id and self.categoria_id and self.jugador.categoria_id != self.categoria_id:
@@ -111,10 +122,15 @@ class Partido(models.Model):
         constraints = [models.CheckConstraint(condition=~models.Q(jugador_a=models.F("jugador_b")), name="inscripciones_partido_distintas")]
     def clean(self):
         from .services import validar_partido
-        if self.division.liga.estado == Liga.Estado.CERRADA: raise ValidationError("Una liga cerrada no admite modificaciones ordinarias.")
+        if self.division.liga.estado == Liga.Estado.CERRADA or self.division.estado == Division.Estado.CANCELADA:
+            raise ValidationError("La división no está disponible para registrar o modificar partidos.")
         if self.jugador_a.division_id != self.division_id or self.jugador_b.division_id != self.division_id:
             raise ValidationError("Ambos jugadores deben estar inscritos en la división del partido.")
-        r = validar_partido(self.jugador_a, self.jugador_b, self.set_1, self.set_2, self.super_tiebreak)
+        exigir_activos = True
+        if self.pk:
+            anterior = type(self).objects.filter(pk=self.pk).values("jugador_a_id", "jugador_b_id").first()
+            exigir_activos = not anterior or anterior["jugador_a_id"] != self.jugador_a_id or anterior["jugador_b_id"] != self.jugador_b_id
+        r = validar_partido(self.jugador_a, self.jugador_b, self.set_1, self.set_2, self.super_tiebreak, exigir_activos)
         self.ganador = self.jugador_a if r.ganador == 1 else self.jugador_b
     def save(self, *args, **kwargs): self.full_clean(); return super().save(*args, **kwargs)
 
@@ -146,8 +162,8 @@ class PuntosTorneo(models.Model):
             raise ValidationError("La inscripción no pertenece a la división indicada.")
         if self.torneo_id and self.division_id and self.torneo.liga_id != self.division.liga_id:
             raise ValidationError("El torneo y la división deben pertenecer a la misma liga.")
-        if self.division_id and self.division.liga.estado == Liga.Estado.CERRADA:
-            raise ValidationError("Una liga cerrada no admite modificaciones ordinarias.")
+        if self.division_id and (self.division.liga.estado == Liga.Estado.CERRADA or self.division.estado == Division.Estado.CANCELADA):
+            raise ValidationError("La división no está disponible para asignar puntos.")
     def save(self, *args, **kwargs): self.full_clean(); return super().save(*args, **kwargs)
 
 class SnapshotRanking(models.Model):

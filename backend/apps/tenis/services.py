@@ -2,6 +2,7 @@ import re
 from dataclasses import dataclass
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from django.db.models import F
 from django.utils import timezone
 from .models import (Auditoria, Categoria, Division, DivisionCategoria, InscripcionDivision,
                      Jugador, Liga, Partido, PuntosTorneo, SnapshotRanking)
@@ -31,11 +32,11 @@ class ResultadoPartido:
     sets: tuple
     super_tiebreak: tuple | None
 
-def validar_partido(a, b, set_1, set_2, super_tiebreak=""):
+def validar_partido(a, b, set_1, set_2, super_tiebreak="", exigir_activos=True):
     if a.pk == b.pk: raise ValidationError("Un jugador no puede competir contra sí mismo.")
     if a.division_id != b.division_id: raise ValidationError("Las inscripciones deben pertenecer a la misma división.")
-    if not a.activa or not b.activa: raise ValidationError("Solo inscripciones activas pueden disputar partidos nuevos.")
-    if a.jugador.estado != Jugador.Estado.ACTIVO or b.jugador.estado != Jugador.Estado.ACTIVO:
+    if exigir_activos and (not a.activa or not b.activa): raise ValidationError("Solo inscripciones activas pueden disputar partidos nuevos.")
+    if exigir_activos and (a.jugador.estado != Jugador.Estado.ACTIVO or b.jugador.estado != Jugador.Estado.ACTIVO):
         raise ValidationError("Solo jugadores activos pueden disputar partidos nuevos.")
     sets = (validar_set_normal(set_1), validar_set_normal(set_2))
     ganadores = tuple(1 if x > y else 2 for x, y in sets)
@@ -100,6 +101,8 @@ def configurar_categorias_division(division, categorias, usuario=None):
     division = Division.objects.select_for_update().select_related("liga").get(pk=division.pk)
     if division.liga.estado == Liga.Estado.CERRADA:
         raise ValidationError("Una liga cerrada no admite cambios de categorías.")
+    if division.estado == Division.Estado.CANCELADA:
+        raise ValidationError("Reactiva la división antes de modificar sus categorías.")
     ids = [categoria.pk for categoria in categorias]
     if not ids: raise ValidationError("Una división debe tener al menos una categoría permitida.")
     if len(ids) != len(set(ids)): raise ValidationError("No se pueden repetir categorías en la configuración.")
@@ -119,15 +122,66 @@ def configurar_categorias_division(division, categorias, usuario=None):
     return division
 
 @transaction.atomic
+def editar_division(division, nombre, orden, categorias, usuario=None):
+    division = Division.objects.select_for_update().select_related("liga").get(pk=division.pk)
+    if division.liga.estado != Liga.Estado.ACTIVA or not division.liga.es_principal:
+        raise ValidationError("Solo se pueden editar divisiones de la liga principal activa.")
+    if division.estado == Division.Estado.CANCELADA:
+        raise ValidationError("Reactiva la división antes de editarla.")
+    divisiones = list(Division.objects.select_for_update().filter(liga=division.liga).order_by("orden", "id"))
+    restantes = [item for item in divisiones if item.pk != division.pk]
+    destino = min(max(orden, 1), len(divisiones)) - 1
+    restantes.insert(destino, division)
+    desplazamiento = max(item.orden for item in divisiones) + len(divisiones) + 10
+    Division.objects.filter(liga=division.liga).update(orden=F("orden") + desplazamiento)
+    for posicion, item in enumerate(restantes, 1):
+        Division.objects.filter(pk=item.pk).update(orden=posicion)
+    division.refresh_from_db()
+    division.nombre = nombre.strip()
+    division.save(update_fields=["nombre"])
+    configurar_categorias_division(division, categorias, usuario)
+    _auditar(usuario, "EDITAR_DIVISION", division, {"nombre": division.nombre, "orden": division.orden})
+    return division
+
+@transaction.atomic
+def eliminar_division(division, usuario=None):
+    division = Division.objects.select_for_update().select_related("liga").get(pk=division.pk)
+    if division.liga.estado != Liga.Estado.ACTIVA or not division.liga.es_principal:
+        raise ValidationError("Solo se pueden eliminar divisiones de la liga principal activa.")
+    if division.inscripciones.filter(activa=True).exists():
+        raise ValidationError("Primero debes quitar todas las inscripciones activas de la división.")
+    if division.partidos.exists() or division.puntos_torneo.exists() or division.snapshots_ranking.exists():
+        raise ValidationError("No se puede eliminar la división porque conserva partidos, puntos o clasificaciones históricas.")
+    datos = {"liga": division.liga.nombre, "nombre": division.nombre}
+    division.inscripciones.filter(activa=False).delete()
+    for relacion in list(division.categorias_permitidas.select_for_update()):
+        relacion.delete()
+    _auditar(usuario, "ELIMINAR", division, datos)
+    division.delete()
+
+@transaction.atomic
+def cambiar_estado_division(division, estado, usuario=None):
+    division = Division.objects.select_for_update().select_related("liga").get(pk=division.pk)
+    if division.liga.estado != Liga.Estado.ACTIVA or not division.liga.es_principal:
+        raise ValidationError("Solo se puede cambiar el estado de divisiones de la liga principal activa.")
+    if estado == Division.Estado.ACTIVA and not division.categorias_permitidas.exists():
+        raise ValidationError("La división necesita al menos una categoría para reactivarse.")
+    division.estado = estado
+    division.save(update_fields=["estado"])
+    _auditar(usuario, "CAMBIAR_ESTADO_DIVISION", division, {"estado": estado})
+    return division
+
+@transaction.atomic
 def inscribir_jugador(division, jugador, usuario=None):
     division = Division.objects.select_for_update().select_related("liga").get(pk=division.pk)
     jugador = Jugador.objects.select_for_update().select_related("categoria").get(pk=jugador.pk)
     if division.liga.estado == Liga.Estado.CERRADA: raise ValidationError("La liga está cerrada.")
+    if division.estado == Division.Estado.CANCELADA: raise ValidationError("La división está cancelada.")
     if jugador.estado != Jugador.Estado.ACTIVO: raise ValidationError("Solo se pueden inscribir jugadores activos.")
     if not division.categorias_permitidas.exists(): raise ValidationError("La división no tiene categorías configuradas.")
     if not DivisionCategoria.objects.filter(division=division, categoria=jugador.categoria).exists():
         raise ValidationError("La categoría del jugador no está permitida en esta división.")
-    if InscripcionDivision.objects.filter(division=division, jugador=jugador).exists():
+    if InscripcionDivision.objects.filter(division=division, jugador=jugador, activa=True).exists():
         raise ValidationError("El jugador ya está inscrito en esta división.")
     inscripcion = InscripcionDivision.objects.create(
         division=division, jugador=jugador, categoria=jugador.categoria

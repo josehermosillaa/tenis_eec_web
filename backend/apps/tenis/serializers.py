@@ -23,11 +23,49 @@ class LigaSerializer(ModeloValidadoSerializer):
 
 class DivisionSerializer(ModeloValidadoSerializer):
     categorias = CategoriaSerializer(many=True, read_only=True)
-    class Meta: model = Division; fields = ("id", "liga", "nombre", "orden", "categorias")
+    cantidad_inscripciones = serializers.IntegerField(source="inscripciones.count", read_only=True)
+    cantidad_inscripciones_activas = serializers.SerializerMethodField()
+    puede_eliminar = serializers.SerializerMethodField()
+    class Meta: model = Division; fields = ("id", "liga", "nombre", "orden", "estado", "categorias", "cantidad_inscripciones", "cantidad_inscripciones_activas", "puede_eliminar")
+
+    def get_cantidad_inscripciones_activas(self, division):
+        return division.inscripciones.filter(activa=True).count()
+
+    def get_puede_eliminar(self, division):
+        return (division.liga.estado == Liga.Estado.ACTIVA and division.liga.es_principal
+                and not division.inscripciones.filter(activa=True).exists()
+                and not division.partidos.exists() and not division.puntos_torneo.exists()
+                and not division.snapshots_ranking.exists())
 
 class JugadorSerializer(ModeloValidadoSerializer):
     categoria_nombre = serializers.CharField(source="categoria.nombre", read_only=True)
-    class Meta: model = Jugador; fields = ("id", "nombre", "categoria", "categoria_nombre", "estado")
+    inscripciones_activas = serializers.SerializerMethodField()
+    class Meta: model = Jugador; fields = ("id", "nombre", "categoria", "categoria_nombre", "estado", "inscripciones_activas")
+
+    def get_inscripciones_activas(self, jugador):
+        inscripciones = jugador.inscripciones.filter(
+            activa=True, division__liga__estado=Liga.Estado.ACTIVA
+        ).select_related("division__liga", "categoria")
+        return [{
+            "id": inscripcion.pk,
+            "division": inscripcion.division_id,
+            "division_nombre": inscripcion.division.nombre,
+            "liga_nombre": inscripcion.division.liga.nombre,
+            "categoria_historica": inscripcion.categoria.nombre,
+        } for inscripcion in inscripciones]
+
+    def validate_categoria(self, categoria):
+        if not self.instance or categoria.pk == self.instance.categoria_id:
+            return categoria
+        incompatibles = self.instance.inscripciones.filter(
+            activa=True, division__liga__estado=Liga.Estado.ACTIVA
+        ).exclude(division__categorias_permitidas__categoria=categoria).select_related("division__liga")
+        nombres = [f"{i.division.nombre} ({i.division.liga.nombre})" for i in incompatibles]
+        if nombres:
+            raise serializers.ValidationError(
+                "Primero debes quitar al jugador de: " + ", ".join(nombres) + "."
+            )
+        return categoria
 
 class InscripcionSerializer(ModeloValidadoSerializer):
     jugador_detalle = JugadorSerializer(source="jugador", read_only=True)
@@ -36,6 +74,16 @@ class InscripcionSerializer(ModeloValidadoSerializer):
         model = InscripcionDivision
         fields = ("id", "division", "jugador", "jugador_detalle", "categoria", "categoria_historica", "activa", "inscrito_en")
         read_only_fields = ("categoria", "categoria_historica", "inscrito_en")
+
+class InscripcionEstadoSerializer(ModeloValidadoSerializer):
+    class Meta:
+        model = InscripcionDivision
+        fields = ("id", "activa")
+
+    def validate_activa(self, value):
+        if value:
+            raise serializers.ValidationError("La reactivación debe realizarse mediante una nueva inscripción.")
+        return value
 
 class PartidoSerializer(ModeloValidadoSerializer):
     jugador_a_nombre = serializers.CharField(source="jugador_a.jugador.nombre", read_only=True)
@@ -54,6 +102,11 @@ class PuntosTorneoSerializer(ModeloValidadoSerializer):
     class Meta: model = PuntosTorneo; fields = ("id", "torneo", "division", "inscripcion", "puntos", "anulado")
 
 class ConfigurarCategoriasSerializer(serializers.Serializer):
+    categorias = serializers.PrimaryKeyRelatedField(queryset=Categoria.objects.filter(activa=True), many=True, allow_empty=False)
+
+class EditarDivisionSerializer(serializers.Serializer):
+    nombre = serializers.CharField(max_length=100)
+    orden = serializers.IntegerField(min_value=1)
     categorias = serializers.PrimaryKeyRelatedField(queryset=Categoria.objects.filter(activa=True), many=True, allow_empty=False)
 
 class InscribirSerializer(serializers.Serializer):

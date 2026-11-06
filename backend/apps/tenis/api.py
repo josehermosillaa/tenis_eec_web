@@ -10,11 +10,11 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Auditoria, Categoria, Division, InscripcionDivision, Jugador, Liga, Partido, PuntosTorneo, Torneo
-from .serializers import (CategoriaSerializer, ConfigurarCategoriasSerializer, DivisionSerializer, InscripcionSerializer,
-    InscribirSerializer, JugadorSerializer, LigaSerializer, LoginSerializer, PartidoSerializer,
+from .serializers import (CategoriaSerializer, ConfigurarCategoriasSerializer, DivisionSerializer, EditarDivisionSerializer, InscripcionSerializer,
+    InscripcionEstadoSerializer, InscribirSerializer, JugadorSerializer, LigaSerializer, LoginSerializer, PartidoSerializer,
     PuntosTorneoSerializer, TorneoSerializer)
-from .services import (calcular_ranking, cerrar_liga, configurar_categorias_division,
-                       establecer_liga_principal, inscribir_jugador)
+from .services import (calcular_ranking, cambiar_estado_division, cerrar_liga, configurar_categorias_division, editar_division,
+                       eliminar_division, establecer_liga_principal, inscribir_jugador)
 
 class CsrfView(APIView):
     permission_classes = [AllowAny]
@@ -48,7 +48,7 @@ class LigaPrincipalView(APIView):
 
 class DivisionesLigaView(generics.ListAPIView):
     permission_classes = [AllowAny]; serializer_class = DivisionSerializer
-    def get_queryset(self): return Division.objects.filter(liga_id=self.kwargs["pk"]).prefetch_related("categorias")
+    def get_queryset(self): return Division.objects.filter(liga_id=self.kwargs["pk"], estado=Division.Estado.ACTIVA).prefetch_related("categorias")
 
 class RankingDivisionView(APIView):
     permission_classes = [AllowAny]
@@ -82,6 +82,43 @@ class JugadoresView(generics.ListAPIView):
 class JugadorDetalleView(generics.RetrieveAPIView):
     permission_classes = [AllowAny]; serializer_class = JugadorSerializer
     queryset = Jugador.objects.select_related("categoria").all()
+
+class PerfilJugadorView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request, pk):
+        jugador = get_object_or_404(Jugador.objects.select_related("categoria"), pk=pk)
+        inscripcion = jugador.inscripciones.filter(
+            activa=True, division__estado=Division.Estado.ACTIVA, division__liga__es_principal=True, division__liga__estado=Liga.Estado.ACTIVA
+        ).select_related("division__liga", "categoria").first()
+        respuesta = {"jugador": JugadorSerializer(jugador).data, "liga": None, "division": None,
+                     "estadisticas": None, "partidos": [], "ranking": []}
+        if not inscripcion:
+            return Response(respuesta)
+        division = inscripcion.division
+        ranking = calcular_ranking(division)
+        fila = next((f for f in ranking if f["inscripcion"].pk == inscripcion.pk), None)
+        campos = ("posicion", "puntos_partidos", "puntos_torneos", "puntos_totales", "partidos",
+                  "ganados", "perdidos", "diferencia_sets", "diferencia_juegos")
+        respuesta["liga"] = LigaSerializer(division.liga).data
+        respuesta["division"] = DivisionSerializer(division).data
+        respuesta["estadisticas"] = {campo: fila[campo] for campo in campos} if fila else {
+            campo: 0 for campo in campos
+        }
+        respuesta["ranking"] = [{
+            "posicion": f["posicion"], "jugador_id": f["jugador"].pk, "jugador": f["jugador"].nombre,
+            "partidos": f["partidos"], "ganados": f["ganados"], "perdidos": f["perdidos"],
+            "categoria": f["categoria"].nombre, "diferencia_sets": f["diferencia_sets"],
+            "puntos_totales": f["puntos_totales"],
+        } for f in ranking]
+        partidos = Partido.objects.filter(
+            Q(jugador_a=inscripcion) | Q(jugador_b=inscripcion), estado=Partido.Estado.TERMINADO
+        ).select_related("jugador_a__jugador", "jugador_b__jugador", "ganador__jugador")
+        respuesta["partidos"] = [{
+            "id": p.pk, "fecha": p.fecha, "rival": p.jugador_b.jugador.nombre if p.jugador_a_id == inscripcion.pk else p.jugador_a.jugador.nombre,
+            "ganado": p.ganador_id == inscripcion.pk, "set_1": p.set_1, "set_2": p.set_2,
+            "super_tiebreak": p.super_tiebreak,
+        } for p in partidos]
+        return Response(respuesta)
 
 class PartidosJugadorView(generics.ListAPIView):
     permission_classes = [AllowAny]; serializer_class = PartidoSerializer
@@ -126,7 +163,18 @@ class AdminUpdateView(generics.UpdateAPIView):
 class AdminLigaUpdateView(AdminUpdateView): serializer_class = LigaSerializer; queryset = Liga.objects.all()
 class AdminCategoriaUpdateView(AdminUpdateView): serializer_class = CategoriaSerializer; queryset = Categoria.objects.all()
 class AdminJugadorUpdateView(AdminUpdateView): serializer_class = JugadorSerializer; queryset = Jugador.objects.all()
-class AdminDivisionUpdateView(AdminUpdateView): serializer_class = DivisionSerializer; queryset = Division.objects.all()
+class AdminInscripcionUpdateView(AdminUpdateView):
+    serializer_class = InscripcionEstadoSerializer
+    queryset = InscripcionDivision.objects.select_related("division__liga", "jugador").all()
+class AdminDivisionUpdateView(AdminUpdateView):
+    serializer_class = DivisionSerializer; queryset = Division.objects.all()
+    def patch(self, request, *args, **kwargs):
+        serializer = EditarDivisionSerializer(data=request.data); serializer.is_valid(raise_exception=True)
+        division = editar_division(self.get_object(), usuario=request.user, **serializer.validated_data)
+        return Response(DivisionSerializer(division).data)
+    def delete(self, request, *args, **kwargs):
+        eliminar_division(self.get_object(), request.user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 class AdminPartidoUpdateView(AdminUpdateView): serializer_class = PartidoSerializer; queryset = Partido.objects.all()
 class AdminTorneoUpdateView(AdminUpdateView): serializer_class = TorneoSerializer; queryset = Torneo.objects.all()
 class AdminPuntosUpdateView(AdminUpdateView): serializer_class = PuntosTorneoSerializer; queryset = PuntosTorneo.objects.all()
@@ -137,6 +185,12 @@ class AdminConfigurarCategoriasView(APIView):
         serializer = ConfigurarCategoriasSerializer(data=request.data); serializer.is_valid(raise_exception=True)
         division = get_object_or_404(Division, pk=pk)
         configurar_categorias_division(division, serializer.validated_data["categorias"], request.user)
+        return Response(DivisionSerializer(division).data)
+
+class AdminEstadoDivisionView(APIView):
+    permission_classes = [IsAdminUser]
+    def post(self, request, pk, estado):
+        division = cambiar_estado_division(get_object_or_404(Division, pk=pk), estado, request.user)
         return Response(DivisionSerializer(division).data)
 
 class AdminInscribirView(APIView):

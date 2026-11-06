@@ -1,9 +1,10 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
 import { Division, Inscripcion, Liga, Partido, Ranking } from '../../core/models';
 
-@Component({selector: 'app-home', standalone: true, imports: [DatePipe, DecimalPipe], templateUrl: './home.component.html'})
+@Component({selector: 'app-home', standalone: true, imports: [DatePipe, DecimalPipe, RouterLink], templateUrl: './home.component.html'})
 export class HomeComponent implements OnInit {
   private readonly api = inject(ApiService);
   readonly liga = signal<Liga | null>(null);
@@ -36,5 +37,11 @@ export class HomeComponent implements OnInit {
   }
 
   iniciales(nombre: string): string { return nombre.split(' ').slice(0, 2).map(p => p[0]).join('').toUpperCase(); }
+  puntajes(p: Partido, jugador: 'a'|'b'): string[] {
+    return [p.set_1, p.set_2, p.super_tiebreak].filter(Boolean).map(set => {
+      const partes = set.split(/\s*[\/-]\s*/);
+      return jugador === 'a' ? partes[0] : partes[1];
+    });
+  }
   private fallar(): void { this.error.set('No hay una liga principal disponible o el servidor no responde.'); this.cargando.set(false); }
 }
