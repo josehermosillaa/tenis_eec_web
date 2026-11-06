@@ -1,0 +1,54 @@
+<section class="league-hero">
+  <div class="court-line court-line-one"></div><div class="court-line court-line-two"></div>
+  <div class="container-xl hero-content">
+    <p class="eyebrow">Temporada oficial</p>
+    @if (liga(); as l) {
+      <h1>{{ l.nombre }}</h1><p class="hero-copy">{{ l.descripcion || 'Consulta posiciones, resultados y protagonistas de cada división.' }}</p>
+      <div class="hero-meta"><span><i></i> Liga activa</span><span>Desde {{ l.fecha_inicio | date:'MMMM y':'':'es-CL' }}</span></div>
+    } @else if (cargando()) { <div class="hero-placeholder"></div> }
+  </div>
+</section>
+
+<section class="container-xl content-shell">
+  @if (error() && !liga()) { <div class="state-card"><span>🎾</span><h2>Estamos preparando la cancha</h2><p>{{ error() }}</p></div> }
+  @if (liga()) {
+    <div class="division-bar" role="tablist" aria-label="Divisiones">
+      @for (division of divisiones(); track division.id) {
+        <button type="button" role="tab" [attr.aria-selected]="activa()?.id === division.id" [class.active]="activa()?.id === division.id" (click)="seleccionar(division)">
+          {{ division.nombre }} <small>{{ division.categorias.length }} cat.</small>
+        </button>
+      }
+    </div>
+
+    @if (activa(); as division) {
+      <div class="section-heading"><div><p class="eyebrow dark">Clasificación actual</p><h2>{{ division.nombre }}</h2></div>
+        <div class="category-pills">@for (cat of division.categorias; track cat.id) { <span>{{ cat.nombre }}</span> }</div>
+      </div>
+      @if (cargandoPanel()) { <div class="loading-grid"><div></div><div></div><div></div></div> }
+      @else {
+        <div class="stats-strip">
+          <div><b>{{ jugadores().length }}</b><span>Jugadores</span></div><div><b>{{ totalPartidos() | number:'1.0-0' }}</b><span>Partidos</span></div><div><b>{{ ranking()[0]?.puntos_totales || 0 }}</b><span>Puntos líder</span></div>
+        </div>
+        <div class="dashboard-grid">
+          <article class="panel ranking-panel">
+            <div class="panel-title"><div><span class="icon-box">↗</span><h3>Ranking</h3></div><span>Actualizado</span></div>
+            @if (ranking().length) {
+              <div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Jugador</th><th class="num">PJ</th><th class="num">PG</th><th class="num">Dif. sets</th><th class="num total">Pts.</th></tr></thead><tbody>
+                @for (fila of ranking(); track fila.inscripcion_id) {<tr [class.podium]="fila.posicion <= 3"><td><span class="position">{{ fila.posicion }}</span></td><td><div class="player"><span class="avatar">{{ iniciales(fila.jugador) }}</span><span><b>{{ fila.jugador }}</b><small>{{ fila.categoria }}</small></span></div></td><td class="num">{{ fila.partidos }}</td><td class="num">{{ fila.ganados }}</td><td class="num">{{ fila.diferencia_sets > 0 ? '+' : '' }}{{ fila.diferencia_sets }}</td><td class="num total">{{ fila.puntos_totales }}</td></tr>}
+              </tbody></table></div>
+            } @else { <div class="empty">Aún no hay jugadores clasificados.</div> }
+          </article>
+
+          <aside class="side-column">
+            <article class="panel"><div class="panel-title"><div><span class="icon-box lime">●</span><h3>Últimos resultados</h3></div></div>
+              <div class="results">@for (p of partidos().slice(0, 5); track p.id) {<div class="result"><time>{{ p.fecha | date:'dd MMM':'':'es-CL' }}</time><div><span [class.winner]="p.ganador_nombre === p.jugador_a_nombre">{{ p.jugador_a_nombre }}</span><b>{{ p.set_1 }}</b></div><div><span [class.winner]="p.ganador_nombre === p.jugador_b_nombre">{{ p.jugador_b_nombre }}</span><b>{{ p.set_2 }}{{ p.super_tiebreak ? ' · ' + p.super_tiebreak : '' }}</b></div></div>} @empty {<div class="empty compact">Sin resultados todavía.</div>}</div>
+            </article>
+            <article class="panel players-card"><div class="panel-title"><div><span class="icon-box blue">◎</span><h3>Jugadores</h3></div><b>{{ jugadores().length }}</b></div>
+              <div class="player-cloud">@for (i of jugadores().slice(0, 12); track i.id) {<span><i>{{ iniciales(i.jugador_detalle.nombre) }}</i>{{ i.jugador_detalle.nombre }}</span>}</div>
+            </article>
+          </aside>
+        </div>
+      }
+    }
+  }
+</section>
