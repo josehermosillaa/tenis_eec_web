@@ -4,4 +4,3 @@ db.sqlite3
 .venv/
 .env
 staticfiles/
-demo_data*.json

@@ -25,11 +25,11 @@ Render solicitará estas variables privadas durante la creación:
 - Django Admin: `https://<nombre-del-servicio>.onrender.com/django-admin/`
 - Estado del servicio: `https://<nombre-del-servicio>.onrender.com/health/`
 
-Las migraciones y la creación o actualización del administrador se ejecutan automáticamente al iniciar el contenedor.
+Las migraciones, los datos iniciales de demostración y la creación o actualización del administrador se ejecutan automáticamente al iniciar el contenedor. Los datos sólo se cargan si PostgreSQL todavía no contiene ligas.
 
 ## Datos
 
-La base PostgreSQL nueva comienza sin ligas, jugadores ni partidos. Los datos del archivo SQLite local no se suben al repositorio. Si se necesitan los datos actuales para la demostración, deben exportarse e importarse de forma controlada después de crear PostgreSQL.
+La imagen incluye un fixture con las ligas, jugadores y partidos preparados para la demostración. Django lo carga automáticamente si la base está vacía y lo omite si ya existen ligas.
 
 La base PostgreSQL gratuita de Render expira a los 30 días. Es apropiada para esta demostración, no para producción permanente.
 

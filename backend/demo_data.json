@@ -1,0 +1,1747 @@
+[
+{
+  "model": "tenis.categoria",
+  "pk": 1,
+  "fields": {
+    "nombre": "Tercera",
+    "activa": true
+  }
+},
+{
+  "model": "tenis.categoria",
+  "pk": 2,
+  "fields": {
+    "nombre": "Cuarta",
+    "activa": true
+  }
+},
+{
+  "model": "tenis.categoria",
+  "pk": 3,
+  "fields": {
+    "nombre": "Primera",
+    "activa": true
+  }
+},
+{
+  "model": "tenis.categoria",
+  "pk": 4,
+  "fields": {
+    "nombre": "Segunda",
+    "activa": true
+  }
+},
+{
+  "model": "tenis.liga",
+  "pk": 1,
+  "fields": {
+    "nombre": "Liga Invierno 2027",
+    "fecha_inicio": "2027-06-01",
+    "fecha_fin": "2026-11-06",
+    "estado": "CERRADA",
+    "es_principal": false,
+    "descripcion": "La temporada que reúne a los mejores jugadores de nuestra comunidad."
+  }
+},
+{
+  "model": "tenis.liga",
+  "pk": 2,
+  "fields": {
+    "nombre": "Liga invierno 2026",
+    "fecha_inicio": "2026-03-02",
+    "fecha_fin": null,
+    "estado": "ACTIVA",
+    "es_principal": true,
+    "descripcion": ""
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 1,
+  "fields": {
+    "nombre": "Matías Rojas",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T14:43:43.751Z",
+    "actualizado_en": "2026-11-06T14:43:43.751Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 2,
+  "fields": {
+    "nombre": "Diego Soto",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T14:43:43.762Z",
+    "actualizado_en": "2026-11-06T16:34:33.572Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 3,
+  "fields": {
+    "nombre": "Tomás Silva",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T14:43:43.773Z",
+    "actualizado_en": "2026-11-06T14:43:43.773Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 4,
+  "fields": {
+    "nombre": "Nicolás Vega",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T14:43:43.783Z",
+    "actualizado_en": "2026-11-06T14:43:43.783Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 5,
+  "fields": {
+    "nombre": "Felipe Díaz",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T14:43:43.794Z",
+    "actualizado_en": "2026-11-06T16:34:31.812Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 6,
+  "fields": {
+    "nombre": "Lucas Pérez",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T14:43:43.805Z",
+    "actualizado_en": "2026-11-06T14:43:43.805Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 7,
+  "fields": {
+    "nombre": "diego huuju",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T16:42:00.350Z",
+    "actualizado_en": "2026-11-06T16:42:00.350Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 8,
+  "fields": {
+    "nombre": "juan perez",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T16:42:53.386Z",
+    "actualizado_en": "2026-11-06T16:42:53.386Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 9,
+  "fields": {
+    "nombre": "judiego jose",
+    "categoria": 4,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T16:46:33.161Z",
+    "actualizado_en": "2026-11-06T17:15:50.487Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 10,
+  "fields": {
+    "nombre": "juan jose farias",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T16:47:12.316Z",
+    "actualizado_en": "2026-11-06T16:47:12.316Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 11,
+  "fields": {
+    "nombre": "diego huuju jhfgkl",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T16:55:42.485Z",
+    "actualizado_en": "2026-11-06T17:00:57.681Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 12,
+  "fields": {
+    "nombre": "Michel Maureira",
+    "categoria": 4,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T17:33:20.370Z",
+    "actualizado_en": "2026-11-06T17:33:20.371Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 13,
+  "fields": {
+    "nombre": "Jose Hermosilla",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:23:30.130Z",
+    "actualizado_en": "2026-11-06T18:23:30.130Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 14,
+  "fields": {
+    "nombre": "Luis Requena",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:23:36.247Z",
+    "actualizado_en": "2026-11-06T18:26:17.150Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 15,
+  "fields": {
+    "nombre": "Luis Monsalve",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:23:42.707Z",
+    "actualizado_en": "2026-11-06T18:23:42.707Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 16,
+  "fields": {
+    "nombre": "Cristian Moraga",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:23:47.827Z",
+    "actualizado_en": "2026-11-06T18:23:47.828Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 17,
+  "fields": {
+    "nombre": "Lito Pino",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:23:53.275Z",
+    "actualizado_en": "2026-11-06T18:23:53.275Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 18,
+  "fields": {
+    "nombre": "Fernando Gómez",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:24:09.226Z",
+    "actualizado_en": "2026-11-06T18:24:09.226Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 19,
+  "fields": {
+    "nombre": "Esteban Barrera",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:24:26.604Z",
+    "actualizado_en": "2026-11-06T18:24:26.604Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 20,
+  "fields": {
+    "nombre": "Luis Pozo",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:24:35.234Z",
+    "actualizado_en": "2026-11-06T18:24:35.234Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 21,
+  "fields": {
+    "nombre": "Nelson Morales",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:24:44.026Z",
+    "actualizado_en": "2026-11-06T18:24:44.026Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 22,
+  "fields": {
+    "nombre": "Matias Ibarra",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:24:51.547Z",
+    "actualizado_en": "2026-11-06T18:24:51.547Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 23,
+  "fields": {
+    "nombre": "Julio Contreras",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:25:06.601Z",
+    "actualizado_en": "2026-11-06T18:25:06.601Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 24,
+  "fields": {
+    "nombre": "Marrie Calic",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:25:20.185Z",
+    "actualizado_en": "2026-11-06T18:25:20.185Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 25,
+  "fields": {
+    "nombre": "Juan Olavarría",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:25:28.069Z",
+    "actualizado_en": "2026-11-06T18:25:28.069Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 26,
+  "fields": {
+    "nombre": "Jean Morales",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:25:34.880Z",
+    "actualizado_en": "2026-11-06T18:25:34.880Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 27,
+  "fields": {
+    "nombre": "Pedro Raineri",
+    "categoria": 2,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:25:44.295Z",
+    "actualizado_en": "2026-11-06T18:25:44.295Z"
+  }
+},
+{
+  "model": "tenis.jugador",
+  "pk": 28,
+  "fields": {
+    "nombre": "Gonzalo Muñoz",
+    "categoria": 1,
+    "estado": "ACTIVO",
+    "creado_en": "2026-11-06T18:25:58.099Z",
+    "actualizado_en": "2026-11-06T18:25:58.099Z"
+  }
+},
+{
+  "model": "tenis.division",
+  "pk": 1,
+  "fields": {
+    "liga": 1,
+    "nombre": "Tercera–Cuarta",
+    "orden": 1,
+    "estado": "ACTIVA"
+  }
+},
+{
+  "model": "tenis.division",
+  "pk": 2,
+  "fields": {
+    "liga": 2,
+    "nombre": "Tercera-Cuarta Categoria",
+    "orden": 1,
+    "estado": "ACTIVA"
+  }
+},
+{
+  "model": "tenis.division",
+  "pk": 3,
+  "fields": {
+    "liga": 2,
+    "nombre": "Segunda",
+    "orden": 2,
+    "estado": "CANCELADA"
+  }
+},
+{
+  "model": "tenis.divisioncategoria",
+  "pk": 1,
+  "fields": {
+    "division": 1,
+    "categoria": 1
+  }
+},
+{
+  "model": "tenis.divisioncategoria",
+  "pk": 2,
+  "fields": {
+    "division": 1,
+    "categoria": 2
+  }
+},
+{
+  "model": "tenis.divisioncategoria",
+  "pk": 3,
+  "fields": {
+    "division": 2,
+    "categoria": 1
+  }
+},
+{
+  "model": "tenis.divisioncategoria",
+  "pk": 4,
+  "fields": {
+    "division": 2,
+    "categoria": 2
+  }
+},
+{
+  "model": "tenis.divisioncategoria",
+  "pk": 5,
+  "fields": {
+    "division": 3,
+    "categoria": 4
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 1,
+  "fields": {
+    "division": 1,
+    "jugador": 1,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T14:43:43.757Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 2,
+  "fields": {
+    "division": 1,
+    "jugador": 2,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T14:43:43.768Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 3,
+  "fields": {
+    "division": 1,
+    "jugador": 3,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T14:43:43.779Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 4,
+  "fields": {
+    "division": 1,
+    "jugador": 4,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T14:43:43.790Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 5,
+  "fields": {
+    "division": 1,
+    "jugador": 5,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T14:43:43.800Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 6,
+  "fields": {
+    "division": 1,
+    "jugador": 6,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T14:43:43.811Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 7,
+  "fields": {
+    "division": 2,
+    "jugador": 2,
+    "categoria": 2,
+    "activa": false,
+    "inscrito_en": "2026-11-06T16:26:26.612Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 8,
+  "fields": {
+    "division": 2,
+    "jugador": 3,
+    "categoria": 1,
+    "activa": false,
+    "inscrito_en": "2026-11-06T16:26:33.828Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 9,
+  "fields": {
+    "division": 2,
+    "jugador": 4,
+    "categoria": 2,
+    "activa": false,
+    "inscrito_en": "2026-11-06T16:42:22.550Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 10,
+  "fields": {
+    "division": 2,
+    "jugador": 8,
+    "categoria": 1,
+    "activa": false,
+    "inscrito_en": "2026-11-06T16:42:53.404Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 11,
+  "fields": {
+    "division": 2,
+    "jugador": 7,
+    "categoria": 1,
+    "activa": false,
+    "inscrito_en": "2026-11-06T16:44:31.180Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 12,
+  "fields": {
+    "division": 3,
+    "jugador": 9,
+    "categoria": 4,
+    "activa": false,
+    "inscrito_en": "2026-11-06T16:46:33.180Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 13,
+  "fields": {
+    "division": 3,
+    "jugador": 9,
+    "categoria": 4,
+    "activa": false,
+    "inscrito_en": "2026-11-06T17:18:21.265Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 14,
+  "fields": {
+    "division": 3,
+    "jugador": 12,
+    "categoria": 4,
+    "activa": false,
+    "inscrito_en": "2026-11-06T17:33:20.392Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 15,
+  "fields": {
+    "division": 2,
+    "jugador": 13,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:23:30.151Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 16,
+  "fields": {
+    "division": 2,
+    "jugador": 18,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:24:09.260Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 17,
+  "fields": {
+    "division": 2,
+    "jugador": 19,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:24:26.638Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 18,
+  "fields": {
+    "division": 2,
+    "jugador": 21,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:24:44.051Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 19,
+  "fields": {
+    "division": 2,
+    "jugador": 23,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:25:06.632Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 20,
+  "fields": {
+    "division": 2,
+    "jugador": 25,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:25:28.099Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 21,
+  "fields": {
+    "division": 2,
+    "jugador": 27,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:25:44.323Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 22,
+  "fields": {
+    "division": 2,
+    "jugador": 28,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:25:58.122Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 23,
+  "fields": {
+    "division": 2,
+    "jugador": 14,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:26:21.569Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 24,
+  "fields": {
+    "division": 2,
+    "jugador": 15,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:26:30.648Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 25,
+  "fields": {
+    "division": 2,
+    "jugador": 16,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:26:36.805Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 26,
+  "fields": {
+    "division": 2,
+    "jugador": 17,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:26:42.480Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 27,
+  "fields": {
+    "division": 2,
+    "jugador": 20,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:27:07.648Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 28,
+  "fields": {
+    "division": 2,
+    "jugador": 22,
+    "categoria": 2,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:27:24.909Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 29,
+  "fields": {
+    "division": 2,
+    "jugador": 24,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:27:41.833Z"
+  }
+},
+{
+  "model": "tenis.inscripciondivision",
+  "pk": 30,
+  "fields": {
+    "division": 2,
+    "jugador": 26,
+    "categoria": 1,
+    "activa": true,
+    "inscrito_en": "2026-11-06T18:28:01.233Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 1,
+  "fields": {
+    "division": 1,
+    "fecha": "2027-07-12",
+    "jugador_a": 1,
+    "jugador_b": 2,
+    "set_1": "6/3",
+    "set_2": "6/4",
+    "super_tiebreak": "",
+    "ganador": 1,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T14:43:43.820Z",
+    "actualizado_en": "2026-11-06T14:43:43.820Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 2,
+  "fields": {
+    "division": 1,
+    "fecha": "2027-07-10",
+    "jugador_a": 3,
+    "jugador_b": 4,
+    "set_1": "6/4",
+    "set_2": "3/6",
+    "super_tiebreak": "10/8",
+    "ganador": 3,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T14:43:43.827Z",
+    "actualizado_en": "2026-11-06T14:43:43.827Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 3,
+  "fields": {
+    "division": 1,
+    "fecha": "2027-07-08",
+    "jugador_a": 5,
+    "jugador_b": 6,
+    "set_1": "7/5",
+    "set_2": "6/2",
+    "super_tiebreak": "",
+    "ganador": 5,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T14:43:43.833Z",
+    "actualizado_en": "2026-11-06T14:43:43.833Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 4,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 7,
+    "jugador_b": 8,
+    "set_1": "6/3",
+    "set_2": "6/4",
+    "super_tiebreak": "",
+    "ganador": 7,
+    "estado": "ANULADO",
+    "creado_en": "2026-11-06T16:28:30.689Z",
+    "actualizado_en": "2026-11-06T18:13:40.639Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 5,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 8,
+    "jugador_b": 7,
+    "set_1": "6/3",
+    "set_2": "4/6",
+    "super_tiebreak": "10/7",
+    "ganador": 8,
+    "estado": "ANULADO",
+    "creado_en": "2026-11-06T16:28:47.310Z",
+    "actualizado_en": "2026-11-06T18:13:42.106Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 6,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 10,
+    "jugador_b": 11,
+    "set_1": "6/7",
+    "set_2": "6/4",
+    "super_tiebreak": "9/11",
+    "ganador": 11,
+    "estado": "ANULADO",
+    "creado_en": "2026-11-06T17:27:17.834Z",
+    "actualizado_en": "2026-11-06T18:13:43.534Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 7,
+  "fields": {
+    "division": 3,
+    "fecha": "2026-11-06",
+    "jugador_a": 14,
+    "jugador_b": 13,
+    "set_1": "6/0",
+    "set_2": "6/0",
+    "super_tiebreak": "",
+    "ganador": 14,
+    "estado": "ANULADO",
+    "creado_en": "2026-11-06T17:33:49.812Z",
+    "actualizado_en": "2026-11-06T18:13:59.174Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 8,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 24,
+    "jugador_b": 21,
+    "set_1": "6/3",
+    "set_2": "6/3",
+    "super_tiebreak": "",
+    "ganador": 24,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:30:47.629Z",
+    "actualizado_en": "2026-11-06T18:30:47.629Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 9,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 15,
+    "jugador_b": 26,
+    "set_1": "7/6",
+    "set_2": "6/2",
+    "super_tiebreak": "",
+    "ganador": 15,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:31:03.895Z",
+    "actualizado_en": "2026-11-06T18:31:03.895Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 10,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 27,
+    "jugador_b": 16,
+    "set_1": "6/4",
+    "set_2": "6/3",
+    "super_tiebreak": "",
+    "ganador": 27,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:31:35.564Z",
+    "actualizado_en": "2026-11-06T18:31:35.564Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 11,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 15,
+    "jugador_b": 23,
+    "set_1": "7/6",
+    "set_2": "6/3",
+    "super_tiebreak": "",
+    "ganador": 15,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:31:55.127Z",
+    "actualizado_en": "2026-11-06T18:31:55.127Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 12,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 24,
+    "jugador_b": 19,
+    "set_1": "6/2",
+    "set_2": "7/6",
+    "super_tiebreak": "",
+    "ganador": 24,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:32:41.354Z",
+    "actualizado_en": "2026-11-06T18:32:41.354Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 13,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 23,
+    "jugador_b": 26,
+    "set_1": "7/5",
+    "set_2": "7/6",
+    "super_tiebreak": "",
+    "ganador": 23,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:33:05.448Z",
+    "actualizado_en": "2026-11-06T18:33:05.448Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 14,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 25,
+    "jugador_b": 30,
+    "set_1": "6/2",
+    "set_2": "6/0",
+    "super_tiebreak": "",
+    "ganador": 25,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:33:35.944Z",
+    "actualizado_en": "2026-11-06T18:33:35.944Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 15,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 23,
+    "jugador_b": 24,
+    "set_1": "6/4",
+    "set_2": "6/4",
+    "super_tiebreak": "",
+    "ganador": 23,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:35:17.222Z",
+    "actualizado_en": "2026-11-06T18:35:17.222Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 16,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 15,
+    "jugador_b": 19,
+    "set_1": "6/4",
+    "set_2": "7/5",
+    "super_tiebreak": "",
+    "ganador": 15,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:35:43.471Z",
+    "actualizado_en": "2026-11-06T18:35:43.471Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 17,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 25,
+    "jugador_b": 16,
+    "set_1": "6/1",
+    "set_2": "6/1",
+    "super_tiebreak": "",
+    "ganador": 25,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:36:02.270Z",
+    "actualizado_en": "2026-11-06T18:36:02.270Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 18,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 15,
+    "jugador_b": 24,
+    "set_1": "6/4",
+    "set_2": "7/6",
+    "super_tiebreak": "",
+    "ganador": 15,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:36:22.499Z",
+    "actualizado_en": "2026-11-06T18:36:22.500Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 19,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 23,
+    "jugador_b": 30,
+    "set_1": "6/2",
+    "set_2": "6/2",
+    "super_tiebreak": "",
+    "ganador": 23,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:36:42.674Z",
+    "actualizado_en": "2026-11-06T18:36:42.674Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 20,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 25,
+    "jugador_b": 15,
+    "set_1": "6/4",
+    "set_2": "7/6",
+    "super_tiebreak": "",
+    "ganador": 25,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:37:17.544Z",
+    "actualizado_en": "2026-11-06T18:37:17.544Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 21,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 23,
+    "jugador_b": 28,
+    "set_1": "6/3",
+    "set_2": "7/5",
+    "super_tiebreak": "",
+    "ganador": 23,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:37:39.990Z",
+    "actualizado_en": "2026-11-06T18:37:39.990Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 22,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 19,
+    "jugador_b": 17,
+    "set_1": "1/6",
+    "set_2": "6/4",
+    "super_tiebreak": "10/6",
+    "ganador": 19,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:38:09.568Z",
+    "actualizado_en": "2026-11-06T18:38:09.568Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 23,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 16,
+    "jugador_b": 24,
+    "set_1": "6/3",
+    "set_2": "6/3",
+    "super_tiebreak": "",
+    "ganador": 16,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:38:28.046Z",
+    "actualizado_en": "2026-11-06T18:38:28.046Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 24,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 15,
+    "jugador_b": 28,
+    "set_1": "6/3",
+    "set_2": "1/6",
+    "super_tiebreak": "10/5",
+    "ganador": 15,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:38:50.150Z",
+    "actualizado_en": "2026-11-06T18:38:50.150Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 25,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 26,
+    "jugador_b": 24,
+    "set_1": "7/6",
+    "set_2": "6/2",
+    "super_tiebreak": "",
+    "ganador": 26,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:39:10.839Z",
+    "actualizado_en": "2026-11-06T18:39:10.839Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 26,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 16,
+    "jugador_b": 27,
+    "set_1": "6/3",
+    "set_2": "6/2",
+    "super_tiebreak": "",
+    "ganador": 16,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:39:33.858Z",
+    "actualizado_en": "2026-11-06T18:39:33.858Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 27,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 23,
+    "jugador_b": 25,
+    "set_1": "6/4",
+    "set_2": "0/6",
+    "super_tiebreak": "10/8",
+    "ganador": 23,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:39:59.781Z",
+    "actualizado_en": "2026-11-06T18:39:59.781Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 28,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 25,
+    "jugador_b": 28,
+    "set_1": "6/2",
+    "set_2": "6/0",
+    "super_tiebreak": "",
+    "ganador": 25,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:40:20.300Z",
+    "actualizado_en": "2026-11-06T18:40:20.300Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 29,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 18,
+    "jugador_b": 28,
+    "set_1": "6/3",
+    "set_2": "3/6",
+    "super_tiebreak": "10/7",
+    "ganador": 18,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:40:45.197Z",
+    "actualizado_en": "2026-11-06T18:40:45.197Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 30,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 24,
+    "jugador_b": 17,
+    "set_1": "7/5",
+    "set_2": "4/6",
+    "super_tiebreak": "10/8",
+    "ganador": 24,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:41:10.120Z",
+    "actualizado_en": "2026-11-06T18:41:10.120Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 31,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 23,
+    "jugador_b": 15,
+    "set_1": "0/6",
+    "set_2": "6/3",
+    "super_tiebreak": "10/4",
+    "ganador": 23,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:41:32.064Z",
+    "actualizado_en": "2026-11-06T18:41:32.064Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 32,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 25,
+    "jugador_b": 20,
+    "set_1": "7/5",
+    "set_2": "6/0",
+    "super_tiebreak": "",
+    "ganador": 25,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:41:53.747Z",
+    "actualizado_en": "2026-11-06T18:41:53.747Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 33,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 23,
+    "jugador_b": 17,
+    "set_1": "6/4",
+    "set_2": "6/2",
+    "super_tiebreak": "",
+    "ganador": 23,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:42:11.529Z",
+    "actualizado_en": "2026-11-06T18:42:11.529Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 34,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 15,
+    "jugador_b": 24,
+    "set_1": "6/0",
+    "set_2": "2/6",
+    "super_tiebreak": "10/8",
+    "ganador": 15,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:42:32.495Z",
+    "actualizado_en": "2026-11-06T18:42:32.495Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 35,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 24,
+    "jugador_b": 20,
+    "set_1": "2/6",
+    "set_2": "7/5",
+    "super_tiebreak": "10/6",
+    "ganador": 24,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:42:53.012Z",
+    "actualizado_en": "2026-11-06T18:42:53.012Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 36,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 18,
+    "jugador_b": 15,
+    "set_1": "4/6",
+    "set_2": "7/5",
+    "super_tiebreak": "11/9",
+    "ganador": 18,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:43:15.675Z",
+    "actualizado_en": "2026-11-06T18:43:15.675Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 37,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 24,
+    "jugador_b": 30,
+    "set_1": "6/2",
+    "set_2": "6/3",
+    "super_tiebreak": "",
+    "ganador": 24,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:43:34.464Z",
+    "actualizado_en": "2026-11-06T18:43:34.464Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 38,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 17,
+    "jugador_b": 25,
+    "set_1": "6/0",
+    "set_2": "6/1",
+    "super_tiebreak": "",
+    "ganador": 17,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:43:53.567Z",
+    "actualizado_en": "2026-11-06T18:43:53.567Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 39,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 18,
+    "jugador_b": 16,
+    "set_1": "5/7",
+    "set_2": "6/0",
+    "super_tiebreak": "10/0",
+    "ganador": 18,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:44:15.032Z",
+    "actualizado_en": "2026-11-06T18:44:15.032Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 40,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 26,
+    "jugador_b": 27,
+    "set_1": "6/3",
+    "set_2": "6/4",
+    "super_tiebreak": "",
+    "ganador": 26,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:44:34.469Z",
+    "actualizado_en": "2026-11-06T18:44:34.469Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 41,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 26,
+    "jugador_b": 15,
+    "set_1": "6/4",
+    "set_2": "6/4",
+    "super_tiebreak": "",
+    "ganador": 26,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:44:50.978Z",
+    "actualizado_en": "2026-11-06T18:44:50.978Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 42,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 27,
+    "jugador_b": 23,
+    "set_1": "6/4",
+    "set_2": "7/5",
+    "super_tiebreak": "",
+    "ganador": 27,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:45:08.942Z",
+    "actualizado_en": "2026-11-06T18:45:08.942Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 43,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 15,
+    "jugador_b": 24,
+    "set_1": "6/4",
+    "set_2": "6/2",
+    "super_tiebreak": "",
+    "ganador": 15,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:45:27.380Z",
+    "actualizado_en": "2026-11-06T18:45:27.380Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 44,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 26,
+    "jugador_b": 16,
+    "set_1": "6/2",
+    "set_2": "6/0",
+    "super_tiebreak": "",
+    "ganador": 26,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:45:42.385Z",
+    "actualizado_en": "2026-11-06T18:45:42.385Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 45,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 29,
+    "jugador_b": 25,
+    "set_1": "7/6",
+    "set_2": "3/6",
+    "super_tiebreak": "10/8",
+    "ganador": 29,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:46:04.290Z",
+    "actualizado_en": "2026-11-06T18:46:04.290Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 46,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 15,
+    "jugador_b": 28,
+    "set_1": "6/2",
+    "set_2": "7/6",
+    "super_tiebreak": "",
+    "ganador": 15,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:46:22.437Z",
+    "actualizado_en": "2026-11-06T18:46:22.437Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 47,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 26,
+    "jugador_b": 23,
+    "set_1": "6/4",
+    "set_2": "7/6",
+    "super_tiebreak": "",
+    "ganador": 26,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:46:38.430Z",
+    "actualizado_en": "2026-11-06T18:46:38.430Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 48,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 16,
+    "jugador_b": 17,
+    "set_1": "7/6",
+    "set_2": "6/4",
+    "super_tiebreak": "",
+    "ganador": 16,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:46:55.857Z",
+    "actualizado_en": "2026-11-06T18:46:55.857Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 49,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 27,
+    "jugador_b": 16,
+    "set_1": "6/4",
+    "set_2": "7/5",
+    "super_tiebreak": "",
+    "ganador": 27,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:47:20.759Z",
+    "actualizado_en": "2026-11-06T18:47:20.759Z"
+  }
+},
+{
+  "model": "tenis.partido",
+  "pk": 50,
+  "fields": {
+    "division": 2,
+    "fecha": "2026-11-06",
+    "jugador_a": 18,
+    "jugador_b": 27,
+    "set_1": "5/7",
+    "set_2": "7/6",
+    "super_tiebreak": "12/10",
+    "ganador": 18,
+    "estado": "TERMINADO",
+    "creado_en": "2026-11-06T18:47:50.110Z",
+    "actualizado_en": "2026-11-06T18:47:50.110Z"
+  }
+},
+{
+  "model": "tenis.snapshotranking",
+  "pk": 1,
+  "fields": {
+    "division": 1,
+    "generado_en": "2026-11-06T16:11:10.157Z",
+    "datos": [
+      {
+        "inscripcion_id": 5,
+        "jugador_id": 5,
+        "jugador": "Felipe Díaz",
+        "categoria_id": 1,
+        "categoria": "Tercera",
+        "posicion": 1,
+        "puntos_partidos": 3,
+        "puntos_torneos": 0,
+        "puntos_totales": 3,
+        "partidos": 1,
+        "ganados": 1,
+        "perdidos": 0,
+        "sets_ganados": 2,
+        "sets_perdidos": 0,
+        "diferencia_sets": 2,
+        "juegos_ganados": 13,
+        "juegos_perdidos": 7,
+        "diferencia_juegos": 6
+      },
+      {
+        "inscripcion_id": 1,
+        "jugador_id": 1,
+        "jugador": "Matías Rojas",
+        "categoria_id": 1,
+        "categoria": "Tercera",
+        "posicion": 2,
+        "puntos_partidos": 3,
+        "puntos_torneos": 0,
+        "puntos_totales": 3,
+        "partidos": 1,
+        "ganados": 1,
+        "perdidos": 0,
+        "sets_ganados": 2,
+        "sets_perdidos": 0,
+        "diferencia_sets": 2,
+        "juegos_ganados": 12,
+        "juegos_perdidos": 7,
+        "diferencia_juegos": 5
+      },
+      {
+        "inscripcion_id": 3,
+        "jugador_id": 3,
+        "jugador": "Tomás Silva",
+        "categoria_id": 1,
+        "categoria": "Tercera",
+        "posicion": 3,
+        "puntos_partidos": 3,
+        "puntos_torneos": 0,
+        "puntos_totales": 3,
+        "partidos": 1,
+        "ganados": 1,
+        "perdidos": 0,
+        "sets_ganados": 2,
+        "sets_perdidos": 1,
+        "diferencia_sets": 1,
+        "juegos_ganados": 9,
+        "juegos_perdidos": 10,
+        "diferencia_juegos": -1
+      },
+      {
+        "inscripcion_id": 4,
+        "jugador_id": 4,
+        "jugador": "Nicolás Vega",
+        "categoria_id": 2,
+        "categoria": "Cuarta",
+        "posicion": 4,
+        "puntos_partidos": 2,
+        "puntos_torneos": 0,
+        "puntos_totales": 2,
+        "partidos": 1,
+        "ganados": 0,
+        "perdidos": 1,
+        "sets_ganados": 1,
+        "sets_perdidos": 2,
+        "diferencia_sets": -1,
+        "juegos_ganados": 10,
+        "juegos_perdidos": 9,
+        "diferencia_juegos": 1
+      },
+      {
+        "inscripcion_id": 2,
+        "jugador_id": 2,
+        "jugador": "Diego Soto",
+        "categoria_id": 2,
+        "categoria": "Cuarta",
+        "posicion": 5,
+        "puntos_partidos": 1,
+        "puntos_torneos": 0,
+        "puntos_totales": 1,
+        "partidos": 1,
+        "ganados": 0,
+        "perdidos": 1,
+        "sets_ganados": 0,
+        "sets_perdidos": 2,
+        "diferencia_sets": -2,
+        "juegos_ganados": 7,
+        "juegos_perdidos": 12,
+        "diferencia_juegos": -5
+      },
+      {
+        "inscripcion_id": 6,
+        "jugador_id": 6,
+        "jugador": "Lucas Pérez",
+        "categoria_id": 2,
+        "categoria": "Cuarta",
+        "posicion": 6,
+        "puntos_partidos": 1,
+        "puntos_torneos": 0,
+        "puntos_totales": 1,
+        "partidos": 1,
+        "ganados": 0,
+        "perdidos": 1,
+        "sets_ganados": 0,
+        "sets_perdidos": 2,
+        "diferencia_sets": -2,
+        "juegos_ganados": 7,
+        "juegos_perdidos": 13,
+        "diferencia_juegos": -6
+      }
+    ],
+    "es_final": true
+  }
+}
+]
