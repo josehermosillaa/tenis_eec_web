@@ -1,0 +1,12 @@
+.git
+.gitignore
+.idea
+.vscode
+**/__pycache__
+**/*.py[cod]
+backend/.venv
+backend/db.sqlite3
+backend/staticfiles
+frontend/.angular
+frontend/dist
+frontend/node_modules
